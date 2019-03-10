@@ -1,8 +1,11 @@
 #include<iostream>
 #include<fstream>
+#include<cstdlib>
+#include<ctime>
 #define endl '\n'
 using namespace std;
 int main(){
+	srand(time(NULL));
 	string pwd,locat;
 	cout<<"Input a string:";
 	cin>>pwd;
@@ -18,8 +21,9 @@ int main(){
 				if(r>=(int)pwd.length())
 					r-=pwd.length();
 				line[i]=(line[i]+pwd[r])%128;
+				cryfile<<(int)line[i]<<" ";
+				if(rand()%2)cryfile<<endl;
 			}
-			cryfile<<line;
 		}
 	}
 	else cout<<"Unable to open file"<<endl;

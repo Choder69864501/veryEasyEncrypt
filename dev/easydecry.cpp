@@ -11,16 +11,14 @@ int main(){
 	cin>>locat;
 	ifstream file(locat);
 	ofstream cryfile("normalFile");
-	int r=0;
+	int temp,r=0;
 	if(file.is_open()){
-		while(getline(file,line)){
-			for(int i=0;i<(int)line.length();i++,r++){
-				if(r>=(int)pwd.length())
-					r-=pwd.length();
-				line[i]-=pwd[r];
-				if(line[i]<0)line[i]+=128;
-			}
-			cryfile<<line;
+		while(file>>temp){
+			if(r>=(int)pwd.length())r-=pwd.length();
+			temp-=pwd[r];
+			if(temp<0)temp+=128;
+			cryfile<<(char)temp;
+			r++;
 		}
 	}
 	else cout<<"Unable to open file"<<endl;
